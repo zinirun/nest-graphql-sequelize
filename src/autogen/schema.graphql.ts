@@ -6,12 +6,25 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export class UserInput {
+    name: string;
+    userId: string;
+    password: string;
+}
+
 export abstract class IQuery {
-    abstract getAll(): User[] | Promise<User[]>;
+    abstract getUsers(): User[] | Promise<User[]>;
+
+    abstract getUserById(): User | Promise<User>;
+}
+
+export abstract class IMutation {
+    abstract createUser(user?: UserInput): User | Promise<User>;
 }
 
 export class User {
-    id: string;
+    id: number;
     name: string;
-    age: number;
+    userId: string;
+    password: string;
 }
