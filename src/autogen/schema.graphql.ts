@@ -26,6 +26,10 @@ export abstract class IQuery {
     abstract getUsers(): User[] | Promise<User[]>;
 
     abstract getUserById(id: number): User | Promise<User>;
+
+    abstract getPosts(): Post[] | Promise<Post[]>;
+
+    abstract getPostById(id: number): Post | Promise<Post>;
 }
 
 export abstract class IMutation {
@@ -34,6 +38,12 @@ export abstract class IMutation {
     abstract updateUser(id: number, user: UserUpdateInput): User | Promise<User>;
 
     abstract deleteUser(id: number): number | Promise<number>;
+
+    abstract createPost(userId: string, post: PostInput): Post | Promise<Post>;
+
+    abstract updatePost(id: number, post: PostInput): Post | Promise<Post>;
+
+    abstract deletePost(id: number): number | Promise<number>;
 }
 
 export class User {
