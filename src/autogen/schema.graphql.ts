@@ -23,7 +23,7 @@ export abstract class IMutation {
 
     abstract updateUser(id: number, user: UserInput): User | Promise<User>;
 
-    abstract deleteUser(id: number): string | Promise<string>;
+    abstract deleteUser(id: number): number | Promise<number>;
 }
 
 export class User {
