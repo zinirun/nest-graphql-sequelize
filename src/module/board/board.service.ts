@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Post, PostInput } from 'src/autogen/schema.graphql';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class BoardService {
