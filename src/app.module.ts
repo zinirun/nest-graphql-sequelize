@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UserModule } from './module/user/user.module';
 import { join } from 'path';
+import { BoardModule } from './module/board/board.module';
+import { DateScalar } from './scalars/date';
 
 @Module({
     imports: [
@@ -13,6 +15,8 @@ import { join } from 'path';
             },
         }),
         UserModule,
+        BoardModule,
     ],
+    providers: [DateScalar],
 })
 export class AppModule {}

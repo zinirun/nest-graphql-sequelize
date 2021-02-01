@@ -17,6 +17,11 @@ export class UserUpdateInput {
     password?: string;
 }
 
+export class PostInput {
+    title: string;
+    content: string;
+}
+
 export abstract class IQuery {
     abstract getUsers(): User[] | Promise<User[]>;
 
@@ -36,4 +41,12 @@ export class User {
     name: string;
     userId: string;
     password: string;
+}
+
+export class Post {
+    id: number;
+    userId: string;
+    title: string;
+    content: string;
+    createdAt: Date;
 }

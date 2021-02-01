@@ -1,3 +1,5 @@
+scalar Date
+
 type Query {
     getUsers: [User]
     getUserById(id: Int!): User
@@ -25,4 +27,17 @@ input UserInput {
 input UserUpdateInput {
     name: String
     password: String
+}
+
+type Post {
+    id: Int!
+    userId: String!
+    title: String!
+    content: String!
+    createdAt: Date!
+}
+
+input PostInput {
+    title: String!
+    content: String!
 }
