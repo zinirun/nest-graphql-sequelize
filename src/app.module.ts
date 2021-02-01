@@ -4,9 +4,11 @@ import { UserModule } from './module/user/user.module';
 import { join } from 'path';
 import { BoardModule } from './module/board/board.module';
 import { DateScalar } from './scalars/date';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
+        TypeOrmModule.forRoot(),
         GraphQLModule.forRoot({
             typePaths: ['./**/*.graphql'],
             definitions: {
