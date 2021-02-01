@@ -22,7 +22,7 @@ export class BoardResolver {
     }
 
     @Mutation('updatePost')
-    async updatePost(@Args('id') id: number, @Args('Post') post: PostInput): Promise<Post> {
+    async updatePost(@Args('id') id: number, @Args('post') post: PostInput): Promise<Post> {
         return await this.boardService.update(id, post);
     }
 
