@@ -15,16 +15,19 @@ export class UserInput {
 export abstract class IQuery {
     abstract getUsers(): User[] | Promise<User[]>;
 
-    abstract getUserById(): User | Promise<User>;
+    abstract getUserById(id: number): User | Promise<User>;
 }
 
 export abstract class IMutation {
-    abstract createUser(user?: UserInput): User | Promise<User>;
+    abstract createUser(user: UserInput): User | Promise<User>;
+
+    abstract updateUser(id: number, user: UserInput): User | Promise<User>;
+
+    abstract deleteUser(id: number): string | Promise<string>;
 }
 
 export class User {
     id: number;
     name: string;
     userId: string;
-    password: string;
 }
