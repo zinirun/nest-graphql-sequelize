@@ -12,6 +12,11 @@ export class UserInput {
     password: string;
 }
 
+export class UserUpdateInput {
+    name?: string;
+    password?: string;
+}
+
 export abstract class IQuery {
     abstract getUsers(): User[] | Promise<User[]>;
 
@@ -21,7 +26,7 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract createUser(user: UserInput): User | Promise<User>;
 
-    abstract updateUser(id: number, user: UserInput): User | Promise<User>;
+    abstract updateUser(id: number, user: UserUpdateInput): User | Promise<User>;
 
     abstract deleteUser(id: number): number | Promise<number>;
 }
@@ -30,4 +35,5 @@ export class User {
     id: number;
     name: string;
     userId: string;
+    password: string;
 }

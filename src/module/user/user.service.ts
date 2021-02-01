@@ -1,14 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { User, UserInput } from 'src/autogen/schema.graphql';
+import { User, UserInput, UserUpdateInput } from 'src/autogen/schema.graphql';
 
 @Injectable()
 export class UserService {
     private users: User[] = [];
 
-    getAll(): Promise<User[]> {
-        return new Promise<User[]>((resolve) => {
-            resolve(this.users);
-        });
+    async getAll(): Promise<User[]> {
+        return this.users;
     }
 
     async getOne(id: number): Promise<User> {
@@ -28,14 +26,9 @@ export class UserService {
         return await this.getOne(id);
     }
 
-    async update(id: number, user: UserInput): Promise<User> {
+    async update(id: number, user: UserUpdateInput): Promise<User> {
         await this.getOne(id);
-        this.users = this.users.map((u) => {
-            if (u.id === id) {
-                return { id, ...user };
-            }
-            return u;
-        });
+        this.users = this.users.map((u) => (u.id === id ? { ...u, ...user } : u));
         return await this.getOne(id);
     }
 
