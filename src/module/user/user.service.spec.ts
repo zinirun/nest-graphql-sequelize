@@ -1,6 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User, UserInput } from '../../autogen/schema.graphql';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -29,7 +28,7 @@ describe('UserService', () => {
     describe('create', () => {
         it('should create', async () => {
             const beforeCreate = await service.getAll().then((users) => users.length);
-            const sampleUser: UserInput = {
+            const sampleUser = {
                 name: 'test-name',
                 userId: 'test-userId',
                 password: 'test-password',
