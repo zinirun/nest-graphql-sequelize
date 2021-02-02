@@ -7,18 +7,18 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class Board {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length: 15 })
+    @Column()
     userId: string;
 
-    @Column({ length: 15 })
-    name: string;
+    @Column({ length: 30 })
+    title: string;
 
     @Column()
-    password: string;
+    content: string;
 
     /**
      * DB insert time.

@@ -39,7 +39,6 @@ type Post {
     userId: String!
     title: String!
     content: String!
-    createdAt: Date!
 }
 
 input PostInput {

@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Post, PostInput } from 'src/autogen/schema.graphql';
-import * as moment from 'moment';
 
 @Injectable()
 export class BoardService {
@@ -23,7 +22,6 @@ export class BoardService {
         this.posts.push({
             id,
             userId,
-            createdAt: moment().toDate(),
             ...post,
         });
         return await this.getOne(id);
