@@ -2,9 +2,11 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Entity()
 export class Board {
@@ -35,4 +37,7 @@ export class Board {
         onUpdate: 'CURRENT_TIMESTAMP(6)',
     })
     public updatedAt: Date;
+
+    @ManyToOne(() => User, (user) => user.posts)
+    user: User;
 }
