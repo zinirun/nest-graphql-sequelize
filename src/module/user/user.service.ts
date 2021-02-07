@@ -23,6 +23,7 @@ export class UserService {
         return user;
     }
 
+    /*
     async getOneByUserId(userId: string): Promise<User> {
         const user = await this.userRepository.findOne({
             userId,
@@ -32,6 +33,7 @@ export class UserService {
         }
         return user;
     }
+    */
 
     async isUserIdExist(userId: string): Promise<boolean> {
         const user = await this.userRepository.findOne({
