@@ -2,6 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -12,9 +13,6 @@ import { User } from '../user/user.entity';
 export class Board {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    userId: string;
 
     @Column({ length: 30 })
     title: string;
@@ -39,5 +37,6 @@ export class Board {
     public updatedAt: Date;
 
     @ManyToOne(() => User, (user) => user.posts)
+    @JoinColumn({ name: 'ref_userId' })
     user: User;
 }
