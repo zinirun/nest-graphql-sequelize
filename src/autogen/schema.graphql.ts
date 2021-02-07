@@ -29,6 +29,8 @@ export abstract class IQuery {
 
     abstract getPosts(): Post[] | Promise<Post[]>;
 
+    abstract getPostsByUserId(userId: number): Post[] | Promise<Post[]>;
+
     abstract getPostById(id: number): Post | Promise<Post>;
 }
 

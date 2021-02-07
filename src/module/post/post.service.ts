@@ -23,6 +23,16 @@ export class PostService {
         return post;
     }
 
+    async getAllByUserId(userId: number): Promise<Post[]> {
+        const posts = await this.postRepository.find({
+            userId,
+        });
+        if (!posts) {
+            throw new NotFoundException(`Posts with userId ${userId}: Not Found`);
+        }
+        return posts;
+    }
+
     async create(userId: number, post: PostInput): Promise<void> {
         try {
             await this.postRepository.save({

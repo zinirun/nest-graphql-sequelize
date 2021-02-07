@@ -4,6 +4,7 @@ type Query {
     getUsers: [User]
     getUserById(id: Int!): User
     getPosts: [Post]
+    getPostsByUserId(userId: Int!): [Post]
     getPostById(id: Int!): Post
 }
 
