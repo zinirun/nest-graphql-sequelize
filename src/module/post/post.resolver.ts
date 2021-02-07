@@ -1,11 +1,15 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { PostInput } from '../../autogen/schema.graphql';
 import { Post } from './post.entity';
+import { UserService } from '../user/user.service';
 import { PostService } from './post.service';
 
 @Resolver()
 export class PostResolver {
-    constructor(private readonly postService: PostService) {}
+    constructor(
+        private readonly postService: PostService,
+        private readonly userService: UserService,
+    ) {}
 
     @Query('getPosts')
     async getAll(): Promise<Post[]> {
@@ -19,6 +23,7 @@ export class PostResolver {
 
     @Mutation('createPost')
     async createPost(@Args('userId') userId: string, @Args('post') post: PostInput): Promise<void> {
+        await this.userService.getOneByUserId(userId);
         return await this.postService.create(userId, post);
     }
 

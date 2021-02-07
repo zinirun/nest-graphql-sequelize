@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './post.entity';
 import { PostInput } from 'src/autogen/schema.graphql';
@@ -24,7 +24,11 @@ export class PostService {
     }
 
     async create(userId: string, post: PostInput): Promise<void> {
-        await this.postRepository.save({ ...post, ref_userId: userId });
+        try {
+            await this.postRepository.save({ ...post, ref_userId: userId });
+        } catch (err) {
+            throw new ConflictException(err);
+        }
     }
 
     async update(id: number, post: PostInput): Promise<Post> {

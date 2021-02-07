@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserInput, UserUpdateInput } from 'src/autogen/schema.graphql';
@@ -23,8 +23,32 @@ export class UserService {
         return user;
     }
 
+    async getOneByUserId(userId: string): Promise<User> {
+        const user = await this.userRepository.findOne({
+            userId,
+        });
+        if (!user) {
+            throw new NotFoundException(`User with userId ${userId}: Not Found`);
+        }
+        return user;
+    }
+
+    async isUserIdExist(userId: string): Promise<boolean> {
+        const user = await this.userRepository.findOne({
+            userId,
+        });
+        return user ? true : false;
+    }
+
     async create(user: UserInput): Promise<void> {
-        await this.userRepository.save(user);
+        if (await this.isUserIdExist(user.userId)) {
+            throw new ConflictException(`userId ${user.userId} is already in use`);
+        }
+        try {
+            await this.userRepository.save(user);
+        } catch (err) {
+            throw new ConflictException(err);
+        }
     }
 
     async update(id: number, user: UserUpdateInput): Promise<User> {
