@@ -39,7 +39,7 @@ export abstract class IMutation {
 
     abstract deleteUser(id: number): number | Promise<number>;
 
-    abstract createPost(userId: string, post: PostInput): Post | Promise<Post>;
+    abstract createPost(userId: number, post: PostInput): Post | Promise<Post>;
 
     abstract updatePost(id: number, post: PostInput): Post | Promise<Post>;
 

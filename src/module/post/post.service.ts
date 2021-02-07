@@ -23,9 +23,12 @@ export class PostService {
         return post;
     }
 
-    async create(userId: string, post: PostInput): Promise<void> {
+    async create(userId: number, post: PostInput): Promise<void> {
         try {
-            await this.postRepository.save({ ...post, ref_userId: userId });
+            await this.postRepository.save({
+                ...post,
+                userId,
+            });
         } catch (err) {
             throw new ConflictException(err);
         }

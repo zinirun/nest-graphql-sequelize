@@ -21,6 +21,14 @@ export class Post {
     content: string;
 
     /**
+     * Join with user -> userId
+     */
+
+    @ManyToOne(() => User, (user) => user.posts)
+    @JoinColumn()
+    userId: number;
+
+    /**
      * DB insert time.
      */
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
@@ -35,8 +43,4 @@ export class Post {
         onUpdate: 'CURRENT_TIMESTAMP(6)',
     })
     public updatedAt: Date;
-
-    @ManyToOne(() => User, (user) => user.posts)
-    @JoinColumn({ name: 'ref_userId' })
-    user: User;
 }

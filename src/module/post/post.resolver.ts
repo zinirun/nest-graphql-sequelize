@@ -22,8 +22,8 @@ export class PostResolver {
     }
 
     @Mutation('createPost')
-    async createPost(@Args('userId') userId: string, @Args('post') post: PostInput): Promise<void> {
-        await this.userService.getOneByUserId(userId);
+    async createPost(@Args('userId') userId: number, @Args('post') post: PostInput): Promise<void> {
+        await this.userService.getOne(userId);
         return await this.postService.create(userId, post);
     }
 

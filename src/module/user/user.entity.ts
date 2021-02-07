@@ -38,6 +38,6 @@ export class User {
     })
     public updatedAt: Date;
 
-    @OneToMany(() => Post, (post) => post.user)
+    @OneToMany(() => Post, (post) => post.userId)
     posts: Post[];
 }
