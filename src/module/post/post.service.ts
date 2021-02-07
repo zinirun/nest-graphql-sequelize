@@ -27,7 +27,7 @@ export class PostService {
         const posts = await this.postRepository.find({
             userId,
         });
-        if (!posts) {
+        if (posts.length === 0) {
             throw new NotFoundException(`Posts with userId ${userId}: Not Found`);
         }
         return posts;
