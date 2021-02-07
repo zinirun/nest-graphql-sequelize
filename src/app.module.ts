@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UserModule } from './module/user/user.module';
-import { BoardModule } from './module/board/board.module';
+import { PostModule } from './module/post/post.module';
 import { join } from 'path';
 import { DateScalar } from './scalars/date';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,7 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             },
         }),
         UserModule,
-        BoardModule,
+        PostModule,
     ],
     providers: [DateScalar],
 })

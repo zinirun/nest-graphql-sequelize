@@ -1,16 +1,16 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { BoardService } from './board.service';
+import { PostService } from './post.service';
 
-describe('BoardService', () => {
-    let service: BoardService;
+describe('PostService', () => {
+    let service: PostService;
 
     beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [BoardService],
+            providers: [PostService],
         }).compile();
 
-        service = module.get<BoardService>(BoardService);
+        service = module.get<PostService>(PostService);
     });
 
     it('should be defined', () => {

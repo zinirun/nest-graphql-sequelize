@@ -6,7 +6,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Board } from '../board/board.entity';
+import { Post } from '../post/post.entity';
 
 @Entity()
 export class User {
@@ -38,6 +38,6 @@ export class User {
     })
     public updatedAt: Date;
 
-    @OneToMany(() => Board, (post) => post.user)
-    posts: Board[];
+    @OneToMany(() => Post, (post) => post.user)
+    posts: Post[];
 }
