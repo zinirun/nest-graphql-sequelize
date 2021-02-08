@@ -2,7 +2,7 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './post.entity';
 import { PostInput } from 'src/autogen/schema.graphql';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class PostService {
@@ -26,6 +26,12 @@ export class PostService {
     async getAllByUserId(userId: number): Promise<Post[]> {
         return await this.postRepository.find({
             userId,
+        });
+    }
+
+    async searchByTitle(title: string): Promise<Post[]> {
+        return await this.postRepository.find({
+            title: Like(title),
         });
     }
 

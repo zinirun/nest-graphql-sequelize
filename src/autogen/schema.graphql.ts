@@ -32,6 +32,8 @@ export abstract class IQuery {
     abstract getPostsByUserId(userId: number): Post[] | Promise<Post[]>;
 
     abstract getPostById(id: number): Post | Promise<Post>;
+
+    abstract searchPostsByTitle(title?: string): Post[] | Promise<Post[]>;
 }
 
 export abstract class IMutation {

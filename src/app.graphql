@@ -6,6 +6,7 @@ type Query {
     getPosts: [Post]
     getPostsByUserId(userId: Int!): [Post]
     getPostById(id: Int!): Post
+    searchPostsByTitle(title: String): [Post]
 }
 
 type Mutation {

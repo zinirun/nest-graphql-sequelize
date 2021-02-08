@@ -21,6 +21,11 @@ export class PostResolver {
         return await this.postService.getAllByUserId(userId);
     }
 
+    @Query('searchPostsByTitle')
+    async searchPostsByTitlte(@Args('title') title: string): Promise<Post[]> {
+        return await this.postService.searchByTitle(title);
+    }
+
     @Query('getPostById')
     async getPostById(@Args('id') id: number): Promise<Post> {
         return await this.postService.getOne(id);
