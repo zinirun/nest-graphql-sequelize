@@ -31,7 +31,7 @@ export class PostService {
 
     async searchByTitle(title: string): Promise<Post[]> {
         return await this.postRepository.find({
-            title: Like(title),
+            title: Like(`%${title}%`),
         });
     }
 
