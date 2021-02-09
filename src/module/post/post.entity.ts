@@ -26,7 +26,7 @@ export class Post {
 
     @ManyToOne(() => User, (user) => user.posts)
     @JoinColumn()
-    userId: number;
+    user: User;
 
     /**
      * DB insert time.

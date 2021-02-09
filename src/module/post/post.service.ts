@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './post.entity';
 import { PostInput } from 'src/autogen/schema.graphql';
 import { Like, Repository } from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Injectable()
 export class PostService {
@@ -12,6 +13,7 @@ export class PostService {
     ) {}
 
     async getAll(): Promise<Post[]> {
+        // with user: find({relations: ["user"]})
         return this.postRepository.find();
     }
 
@@ -24,8 +26,9 @@ export class PostService {
     }
 
     async getAllByUserId(userId: number): Promise<Post[]> {
+        const user = await this.getOne(userId);
         return await this.postRepository.find({
-            userId,
+            user,
         });
     }
 
@@ -35,11 +38,11 @@ export class PostService {
         });
     }
 
-    async create(userId: number, post: PostInput): Promise<void> {
+    async create(user: User, post: PostInput): Promise<void> {
         try {
             await this.postRepository.save({
                 ...post,
-                userId,
+                user,
             });
         } catch (err) {
             throw new ConflictException(err);
