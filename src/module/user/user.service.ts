@@ -2,13 +2,16 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserInput, UserUpdateInput } from 'src/autogen/schema.graphql';
-import { Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
+import { Post } from '../post/post.entity';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>,
+        @InjectRepository(Post)
+        private postRepository: Repository<Post>,
     ) {}
 
     getAll(): Promise<User[]> {
@@ -63,8 +66,21 @@ export class UserService {
     }
 
     async delete(id: number): Promise<number> {
-        await this.getOne(id);
-        await this.userRepository.delete(id);
-        return id;
+        const user = await this.getOne(id);
+
+        const queryRunner = await getConnection().createQueryRunner();
+        await queryRunner.startTransaction();
+
+        try {
+            await this.postRepository.delete({ user });
+            await this.userRepository.delete(id);
+            await queryRunner.commitTransaction();
+        } catch (err) {
+            console.log(err);
+            await queryRunner.rollbackTransaction();
+        } finally {
+            await queryRunner.release();
+            return id;
+        }
     }
 }
