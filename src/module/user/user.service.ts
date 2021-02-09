@@ -1,4 +1,9 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+    BadRequestException,
+    ConflictException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserInput, UserUpdateInput } from 'src/autogen/schema.graphql';
@@ -76,8 +81,8 @@ export class UserService {
             await this.userRepository.delete(id);
             await queryRunner.commitTransaction();
         } catch (err) {
-            console.log(err);
             await queryRunner.rollbackTransaction();
+            throw new BadRequestException(err);
         } finally {
             await queryRunner.release();
             return id;
