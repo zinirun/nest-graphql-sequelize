@@ -15,12 +15,12 @@ add file `ormconfig.json` which configures TypeORM connection to project folder
 
 ```json
 {
-    "type": "mysql", // can use other databases
+    "type": "mysql", //can-use-other-databases
     "host": "localhost",
     "port": 3306,
     "username": "",
     "password": "",
-    "database": "", // don't forget to create database
+    "database": "", //don't-forget-to-create-database-first
     "entities": ["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
 }
@@ -98,7 +98,7 @@ mutation createUser($user: UserInput!) {
 ```
 
 ```json
-// Query Variables
+//Query Variables
 {
   "user": {
     "name": "zini",
@@ -121,7 +121,7 @@ mutation createPost($userId: Int!, $post: PostInput!) {
 ```
 
 ```json
-// Query Variables
+//Query Variables
 {
   "userId": 1,
   "post": {
